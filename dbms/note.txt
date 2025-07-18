@@ -1,0 +1,196 @@
+Indexing: Indexing is a crucial technique used in databases to optimize data retrieval operations. Indexing allows the database management system (DBMS) to locate data more efficiently without having to scan the entire dataset.
+Indexes are smaller referential tables that hold row references against the indexed value
+Indexes are organized data structures that allow quick searching based on key values.
+
+Types Of Indexing:
+Clustered Indexing: Clustered indexing is a technique where multiple related records are stored together in the same file. This helps reduce the cost of searching because related data is kept close to each other.
+Non-clustered: A non-clustered index just tells us where the data lies, i.e. it gives us a list of virtual pointers or references to the location where the data is actually stored. Data is not physically stored in the order of the index. Instead, data is present in leaf nodes.
+Multilevel Indexing: With the growth of the size of the database, indices also grow. As the index is stored in the main memory, a single-level index might become too large a size to store with multiple disk accesses.
+Index command:
+create index<index-name> on <table>(<columns>)
+drop index<index-name>
+Tree Indexing: It uses tree structures to organize data for fast searching, insertion, and range queries.
+A B+ Tree is a balanced tree data structure widely used in database indexing to efficiently manage and access large amounts of data.
+Every binary tree node is serialized and stored in disk.
+Non leaf Nodes hold routing information
+Leaf Nodes hold the actual row data
+Each leaf Node are mutually connected
+How to find one data in B+ tree
+	    Traverse from the root node , reach the leaf node , read the leaf and extract data
+
+
+Ok for static data but problematic if dynamic
+• Lots of overflow pages reduce performance
+• Empty pages lead to space overheads
+B-tree:
+Structure: Nodes contain keys and data (or pointers to data). 
+Search: Can search for data within any node. 
+Range Queries: Can be less efficient for range queries as it might require traversing multiple levels of the tree. 
+Sequential Access: Can be less efficient for sequential access as data is not necessarily stored together in leaf nodes. 
+Example: Used in some database indexing, but B+ trees are more common. 
+B+tree:
+Structure: Internal nodes only contain keys and pointers to child nodes. Leaf nodes contain keys and pointers to the actual data (or the data itself). 
+Search: Search always ends at a leaf node. 
+Range Queries: Efficient for range queries due to the linked leaf nodes that provide sequential access to data. 
+HASH VS TREE INDEXES
+	• Tree index: traverse search tree to find interesting leafs
+• Hash index: evaluate hash function to find buckets
+
+
+
+
+
+Types of Hashing in DBMS
+Static Hashing : Open Hashing/chain Hashing - After Passing through the Hashfunction if more than one data having same result stored in the form of linkedList. 
+However, this will give rise to the problem bucket skew that is, if the hash function keeps generating the same value again and again then the hashing will become inefficient as the remaining data buckets will stay unoccupied or store minimal data.
+
+Close Hashing: This is also called closed hashing this aims to solve the problem of collision by looking out for the next empty slot available which can store data. It uses techniques like linear probing, quadratic probing, double hashing, etc.
+
+Dynamic Hashing/Extendible :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8-7-25
+
+JOINS - -
+
+Inner join - Inner Join is a join operation in DBMS that combines two or more tables based on related columns and returns only rows that have matching values among tables. Inner join has two types.
+
+
+3types- 	Conditional join
+Equi Join
+Natural Join
+
+
+Conditional join / Theta Join - Conditional join or Theta join is a type of inner join in which tables are combined based on the specified condition.
+the join condition can include <, >, <=, >=, ≠ operators in addition to the '=' operator.
+
+Equi join-Equi Join is a type of inner join where the join condition uses the equality operator ('=') between columns.
+
+
+Natural join- Natural join is a type of inner join in which we do not need any comparison operators. In natural join, columns should have the same name and domain. There should be at least one common attribute between the two tables.
+
+Self join- use to join 1 table with itself .A Self Join can help us retrieve employee-manager relationships, where each employee in the table has a reference to their manager's ID.
+Employee table SELECT e.employee_name AS employee,
+m.employee_name AS managerFROM
+employees AS e JOIN employees
+AS m ON e.manager_id = m.employee_id;
+
+
+Outer join-Outer join is a type of join that retrieves matching as well as non-matching records from related tables. There are three types of outer join
+Left outer join
+Right outer join
+Full outer join
+Left outer join -It is also called left join. This type of outer join retrieves all records from the left table and retrieves matching records from the right table.
+
+
+
+Right outer join - retrieve all the right table rows 
+
+
+
+
+
+Full outer join-
+
+
+
+Cross join - Cartesian product of 2 tables
+CROSS JOIN performs the cross-product of records from two or more joined tables.
+It is used when we want every possible combination of rows to be present in a database's tables. 
+
+
+
+
+
+Anomalies insertion ,deletion , update
+
+1. Insertion Anomalies: Insertion anomalies occur when it's not possible to insert new data into a table without including unrelated or redundant data.
+
+2. Deletion Anomalies:Deletion anomalies arise when deleting a record from a table inadvertently removes other important information.
+
+3. Update Anomalies:Update anomalies occur when modifying a piece of data requires updating multiple records to maintain consistency.
+
+To reduce anomalies we use normalization.
+
+Normalization : The process of removing redundancy by decomposing table is called normalization.
+
+Lossless decomposition :Lossless join decomposition is a decomposition of a relation R into relations R1, and R2 such that if we perform a natural join of relation R1 and R2, it will return the original relation R. This is effective in removing redundancy from databases while preserving the original data.
+
+
+Only 1NF,2NF,3NF, and BCNF are valid for lossless join decomposition.
+When we  decompose a relation we should make sure there is a  common attribute in both of them.
+The common attribute should be a key in any one of the table.
+
+1NF : In 1NF the table has to be flat. No multivalued or composite attribute are allowed.
+
+
+
+
+2NF: 
+
+Candidate key: minimal subset of attributes that can uniquely identify the entire table.
+Superkey : set of attributes that can uniquely identify the table . need not be minimal.
+Prime attribute: A prime attribute is any attribute that is part of at least one candidate key within a relation
+
+Non prime attribute : not part of candidate key.
+
+In 2NF partial dependencies is not allowed . Part of candidate key derive non prime attribute.
+
+3NF : 
+Non prime attribute -> non prime attribute not allowed
+For each functional dependency :
+		LHS should be CK or SK
+	`	or RHS is PA
+No transitive dependencies
+
+
+BCNF : 
+
+LHS should be CK/SK
+BCNF have 0% redundancy.
+May or may not be lossless decomposition
+
+
+
+
+
+
+
+
+
+Memory : 
+PostgreSQL primarily uses two types of memory: shared memory and local memory.
+1. Shared Memory:
+Shared Buffer Pool: This area stores frequently accessed data and index pages, reducing disk I/O. It's a critical component for caching and improving read performance. 
+WAL Buffer: This area stores the write-ahead log (WAL) data, which is the transaction log used for recovery and consistency. It temporarily holds changes before writing them to disk. 
+Commit Log: This area stores the status of transactions for concurrency control. 
+2. Local Memory:
+Work Memory: Each backend process uses this for sorting (e.g., ORDER BY, DISTINCT), joining tables, and hash tables.
+Maintenance Work Memory: This area is used by maintenance operations like VACUUM and index creation.
+Temp Buffers: This area is used for storing temporary tables. 
+
+
+
+
