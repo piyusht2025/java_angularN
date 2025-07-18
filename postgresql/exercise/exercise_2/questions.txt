@@ -1,0 +1,116 @@
+Questions:
+List all active employees with their email addresses.
+Get all course names along with their creation dates.
+List all videos belonging to a specific chapter ID.
+Show all attachments related to a specific video.
+
+Find all employees enrolled in a particular course along with their department names.
+List all courses and the number of employees enrolled in each.
+Show each employee's total number of notes across all videos.
+Find all chapters associated with a specific course.
+Get comments made on a specific video along with employee names.
+List all videos with their chapter names and course names.
+
+Find employees who have enrolled in more than 2 courses.
+Calculate the average progress per course.
+Find the top 3 most commented videos.
+List all active employees who haven’t enrolled in any course.
+Find the total duration of all videos in a specific course.
+
+
+
+				Answers
+SELECT e.emp_id,e.emp_name,e.email 
+from emp_details e
+where e.is_active=TRUE; 
+
+2.	Select c.course_name , c.created_date 
+from courses c
+Where c.is_active=TRUE;
+
+3. 	Select v.vid_id from video v 
+	Where v.chap_id=1;
+
+4.	Select a.att_id,a.att_name from attachment a 
+	Where a.vid_id=1;
+
+5.	Find all employees enrolled in a particular course along with their    department names.
+ 	
+Select e.emp_name,e.department 
+	From (emp_details natural join emp_courses) e 
+	Where course_id=2;
+
+
+
+
+6.	List all courses and the number of employees enrolled in each.
+
+
+Select jc.course_name , count(jc.emp_id)	
+	from (courses c left join emp_course ec  on c.course_id=ec.course_id)jc 
+	group by jc.course_name ;
+
+7.	Show each employee's total number of notes across all videos.
+	
+Select ed.emp_id,ed.emp_name,count(un.note_id) 
+from emp_details ed left join user_notes un on ed.emp_id=un.emp_id 
+group by ed.emp_id , ed.emp_name ;
+
+8.Find all chapters associated with a specific course.
+
+Select c.chap_id , c.chap_name
+From chapter c left join course_chapter  cc on c.chap_id=cc.chap_id 
+Where cc.course_id=2;
+
+9.Get comments made on a specific video along with employee names.
+
+Select c.com_desc , e.emp_name 
+From emp_details e left join video_comments vc on e.emp_id=vc.emp_id
+Where vc.vid_id=1; 
+
+10.  List all videos with their chapter names and course names.
+
+Select v.vid_id , ch.chap_name, co.course_name 
+From video v left join chapter ch on v.chap_id=ch.chap_id 
+Join course_chapter cc on ch.chap_id=cc.chap_id
+Joini courses co on cc.course_id=co.course_id;
+
+
+
+
+
+11.Find employees who have enrolled in more than 2 courses.
+
+Select e.emp_name , count(ec.course_id)from  
+Emp_details e left join emp_course ec on e.emp_id=ec.emp_id
+Group by e.emp_name 
+having count(ec.course_id)>2;
+
+12. Calculate the average progress per course.
+
+Select c.course_id , round(avg(c.progress),2) as avg_progress
+From emp_course c 
+Group by c.course_id;
+
+13.Find the top 3 most commented videos.
+
+Select v.vid_id,count(vc.com_id)
+From video v left join video_comments vc on v .vid_id=vc.vid_id 
+Group by v.vid_id
+Order by count(vc.com_id) desc
+Limit 3;
+
+14.List all active employees who haven’t enrolled in any course.
+
+Select e.emp_id,e.emp_name from
+Emp_details e left join emp_course ec on e.emp_id=ec.emp_id 
+Where e.is_active = TRUE AND ec.course_id=NULL;
+
+15. Find the total duration of all videos in a specific course.
+
+Select c.course_id ,sum( v.vid_duration) from
+courses c left join course_chapter cc  on c.course_id = cc.course_id
+left join chapter ch on cc.chap_id=ch.chap_id
+left join  video v on cc.chap_id = v.chap_id 
+Group by c.course_id;
+

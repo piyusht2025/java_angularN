@@ -1,0 +1,104 @@
+Exercise 1 : Department-Employee
+
+B. Generate DDL Statements
+Write SQL DDL to create both tables using appropriate data types and constraints.
+Apply foreign key constraints where needed.
+Add extra user-related fields to employees table (your choice).
+
+create table departments (deptid int primary key,deptname text);
+
+create table employees (eid int primary key , ename text ,  deptid int references department(deptid) ,  emailid text);
+
+alter table employees rename  emailid to email_id;
+
+C. Insert Sample Data
+Insert at least 3 department records.
+Insert at least 5 employees ensuring:
+Some departments have multiple employees.
+At least one department has no employee.
+
+insert into departments values
+(1,'CSE'),
+(2,'IT'),
+(3,'cybersecurity');
+
+insert into employees values
+		(101,'Piyush',1,'piyush@gmail.com'),
+		(102,'sahil',1,'sahil123@gmail.com'),
+		(103,'kunal',1,'kunal@gmail.com'),
+		(104,'naveen',2,'naveen@gmail.com'),
+		(105,'ashutosh',2,'ashutosh@gmail.com');
+
+D. Query Section
+
+1.Write a query to list all employees with their department names using a JOIN.
+
+select E.eid,E.ename,E.email_id,D.deptname from employees E join departments D on (E.deptid=D.deptid);
+
+
+
+2.Write a query to list all departments with the number of employees in each (use GROUP BY).
+
+
+select D.deptname , count(*) from employees E natural join departments D group by D.deptid;
+
+
+
+
+
+3.Fetch all employees whose department is either 'HR' or 'Sales' (use IN clause).
+
+
+select ED.ename from (employees E natural join departments D) as ED where ED.deptname IN ('CSE','IT');  		// i have used ‘CSE’,’IT’ instead of ‘HR’,’SALES’
+
+
+
+4.List all employees who joined after a certain date (use WHERE clause).
+
+
+alter table employees add doj date;
+
+
+UPDATE employees SET doj = '2025-02-15' WHERE eid = 101;
+UPDATE employees SET doj = '2021-05-16' WHERE eid = 102;
+UPDATE employees SET doj = '2021-05-16' WHERE eid = 103;
+UPDATE employees SET doj = '2022-07-01' WHERE eid = 104;
+UPDATE employees SET doj = '2023-02-03' WHERE eid = 105;
+
+
+select ED.ename from (employees E natural join departments D )as ED where ED.doj >'2022-08-15';
+
+
+
+5.Fetch employees sorted by their salary in descending order (use ORDER BY clause).
+
+
+alter table employees add salary float;
+UPDATE employees SET salary=20000  WHERE eid = 101;
+UPDATE employees SET salary=15000  WHERE eid = 102;
+UPDATE employees SET salary=21700 WHERE eid = 103;
+UPDATE employees SET  salary=19000 WHERE eid = 104;
+UPDATE employees SET  salary=17000 WHERE eid = 105;
+
+
+select E.ename,E.eid,E.salary from employees E where salary>18000;
+
+
+
+
+
+
+
+
+
+6.Write a query to find departments with no employees.
+SELECT d.deptid, d.deptname FROM employees e RIGHT OUTER JOIN departments d ON e.deptid = d.deptid
+WHERE e.eid IS NULL;
+
+
+
+
+
+7.Write a query to fetch employee names that contain the letter 'a' (use LIKE clause).
+
+select E.ename from employees E where E.ename like ('%a%');
