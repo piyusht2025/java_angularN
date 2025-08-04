@@ -1,0 +1,75 @@
+package com.library;
+import com.library.members.Member;
+import com.library.books.Books;
+import com.library.transactions.Transaction;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Books b1=new Books("B1","Title 1","Author 1" , 001);
+        Books b2=new Books("B2","Title 2","Author 2" , 002);
+        Books b3=new Books("B3","Title 3","Author 3" , 003);
+        Books b4=new Books("B4","Title 4","Author 4" , 004);
+        Books B[]=new Books[4];
+        B[0]=b1;
+        B[1]=b2;
+        B[2]=b3;
+        B[3]=b4;
+        Member m1 =new Member("m1",100);
+        Member m2 =new Member("m2",200);
+        Member m3 =new Member("m3",300);
+        Member M[]=new Member[3];
+        M[0]=m1;
+        M[1]=m2;
+        M[2]=m3;
+        class Helper{
+            Books getRef(String id){
+                for (Books x:B) {
+                    if (x.getId().equals(id)) {
+                        return x;
+                    }
+                }
+                return null;
+            }
+            void availableBooks(){
+                for (Books x:B){
+                    if (x.isAvailable()){
+                        System.out.print(x.getId()+" ");
+                    }
+                }
+            }
+        }
+        Helper helper=new Helper();
+        helper.availableBooks();
+        Scanner sc=new Scanner(System.in);
+
+        System.out.println("\nEnter a Book");
+        String s= sc.next();
+        Books taken = null;
+
+
+        taken=helper.getRef(s);
+
+        m.borrowBook(taken);
+        Transaction t =new Transaction();
+        t.borrowedBook(m,taken);
+       // System.out.println(taken.isAvailable());
+
+        System.out.print("Available Books : ");
+        helper.availableBooks();
+        /*for (Books x:B){
+            if (x.isAvailable()){
+                System.out.print(x.getId()+" ");
+            }
+        }*/
+        System.out.print("\n Member "+m.getName()+" borrowed: ");
+
+        m.borrowedBook();
+        System.out.println("Enter Book You want to return");
+        String id=sc.next();
+
+        m.returnBook(id);
+        t.returnedBook(m,helper.getRef(id));
+    }
+}
