@@ -1,30 +1,5 @@
 package inheritanceExercise;
-
 import java.util.Scanner;
-
-class Animal{
-    void makeSound(){
-        System.out.println("Animal Sound");
-    }
-}
-class Dog extends Animal{
-    @Override
-    void makeSound(){
-        System.out.println("DOG makes :  bark");
-    }
-}
-class Cat extends Animal{
-    @Override
-    void makeSound(){
-        System.out.println("CAT makes :  meow");
-    }
-}
-class Cow extends Animal{
-    @Override
-    void makeSound(){
-        System.out.println("COW makes :  maw");
-    }
-}
 public class Main {
     public static void main(String[] args) {
         System.out.println("Enter 1 for DOG , 2 for CAT, 3 for COW");
