@@ -35,7 +35,7 @@ db.esupport.createIndex({location:"2dsphere"});
   }
 ]
 
-2.db.esupport.find({type: "Hospital",  
+2.db.esupport.find({  
     location: {$near: {
       $geometry: {
         type: "Point",
@@ -121,5 +121,31 @@ db.esupport.createIndex({location:"2dsphere"});
     name: 'Fire Station No. 5',
     type: 'Fire Station',
     location: { type: 'Point', coordinates: [ 77.62, 12.98 ] }
+  }
+]
+
+5.db.esupport.aggregate([
+  {
+  $geoNear: {
+    near: {
+      
+        type: "Point",
+        coordinates: [77.5950, 12.9755]
+      },
+      distanceField:"distance",
+      spherical:true
+    }
+  },{$limit:1}
+])
+
+output - 
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] },
+    distance: 558.6914993450282
   }
 ]
