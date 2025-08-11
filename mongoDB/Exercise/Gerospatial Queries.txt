@@ -1,0 +1,151 @@
+db.esupport.createIndex({location:"2dsphere"});
+
+1.db.esupport.find({location:{$near:{$geometry:{type:"point",coordinates:[77.5950,12.9755]}, $maxDistance:5000}}});
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03d'),
+    name: 'Fire Station No. 12',
+    type: 'Fire Station',
+    location: { type: 'Point', coordinates: [ 77.59, 12.988 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03e'),
+    name: 'Police HQ',
+    type: 'Police Station',
+    location: { type: 'Point', coordinates: [ 77.582, 12.965 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03f'),
+    name: 'Greenview Clinic',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.61, 12.96 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a040'),
+    name: 'Fire Station No. 5',
+    type: 'Fire Station',
+    location: { type: 'Point', coordinates: [ 77.62, 12.98 ] }
+  }
+]
+
+2.db.esupport.find({  
+    location: {$near: {
+      $geometry: {
+        type: "Point",
+        coordinates: [77.5950, 12.9755]
+      }
+    }
+  }
+}).limit(1)
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] }
+  }
+]
+
+3.db.esupport.find({
+  location: {
+    $near: {
+      $geometry: {
+        type: "Point",
+        coordinates: [77.5950, 12.9755]
+      }
+    }
+  }
+}).limit(2)
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03d'),
+    name: 'Fire Station No. 12',
+    type: 'Fire Station',
+    location: { type: 'Point', coordinates: [ 77.59, 12.988 ] }
+  }
+]
+
+4.db.esupport.find({
+  location: {
+    $geoWithin: {
+      $box: [
+        [77.5800, 12.9600], // SW corner
+        [77.6200, 12.9900]  // NE corner
+      ]
+    }
+  }
+})
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03d'),
+    name: 'Fire Station No. 12',
+    type: 'Fire Station',
+    location: { type: 'Point', coordinates: [ 77.59, 12.988 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03e'),
+    name: 'Police HQ',
+    type: 'Police Station',
+    location: { type: 'Point', coordinates: [ 77.582, 12.965 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03f'),
+    name: 'Greenview Clinic',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.61, 12.96 ] }
+  },
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a040'),
+    name: 'Fire Station No. 5',
+    type: 'Fire Station',
+    location: { type: 'Point', coordinates: [ 77.62, 12.98 ] }
+  }
+]
+
+5.db.esupport.aggregate([
+  {
+  $geoNear: {
+    near: {
+      
+        type: "Point",
+        coordinates: [77.5950, 12.9755]
+      },
+      distanceField:"distance",
+      spherical:true
+    }
+  },{$limit:1}
+])
+
+output - 
+
+[
+  {
+    _id: ObjectId('6878bf7be67c60a33c32a03c'),
+    name: 'Apollo General Hospital',
+    type: 'Hospital',
+    location: { type: 'Point', coordinates: [ 77.6001, 12.9748 ] },
+    distance: 558.6914993450282
+  }
+]
