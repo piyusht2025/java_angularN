@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e682be36-38cd-4b2c-962a-e5d6aaec2271" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Exercise_1/Exercise_1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_2/Exercise_2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_3_Multithreading/Exercise_3_Multithreading.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise_4 libraryManagement/Exercise_4 libraryManagement.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Practise/firstProgram/src/javaIO/Copytolowercase.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Practise/firstProgram/src/javaIO/Copytolowercase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Practise/firstProgram/src/javaIO/text1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Practise/firstProgram/src/javaIO/text1.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="3105AECyqc84C55SWMvO0uPteWH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "JAVA",
+    "last_opened_file_path": "/home/piyusht@id.argusoft.com/Desktop/java_angularN/JAVA/Exercises"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e682be36-38cd-4b2c-962a-e5d6aaec2271" name="Changes" comment="" />
+      <created>1754648003928</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754648003928</updated>
+    </task>
+    <servers />
+  </component>
+</project>
