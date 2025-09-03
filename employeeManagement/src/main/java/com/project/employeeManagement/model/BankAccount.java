@@ -1,5 +1,7 @@
 package com.project.employeeManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +24,6 @@ public class BankAccount {
 
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "id")
+
     private EmployeeDetails employeeDetails;
 }

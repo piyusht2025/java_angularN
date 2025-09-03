@@ -1,5 +1,6 @@
 package com.project.employeeManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Address {
     @Column(name = "address_detail")
     private String addressDetails;
 
-    @ManyToMany(mappedBy = "addresses")
+    @ManyToMany(mappedBy = "addresses",cascade = {CascadeType.ALL})
+
     private List<EmployeeDetails> employees;
 }

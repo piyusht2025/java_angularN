@@ -1,10 +1,10 @@
 package com.project.employeeManagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
+@Jacksonized
 @Table(name = "employee_details")
 public class EmployeeDetails {
     @Id
@@ -30,7 +32,11 @@ public class EmployeeDetails {
     @JoinColumn(name = "design_id", referencedColumnName = "id")
     private Designation designation;
 
+    @Column(name="active")
+    private boolean active=true;
+
     @OneToMany(mappedBy = "employeeDetails")
+    @JsonIgnore
     private List<BankAccount> bankAccounts;
 
     @ManyToMany
@@ -39,6 +45,7 @@ public class EmployeeDetails {
             joinColumns = @JoinColumn(name = "emp_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id")
     )
+    @JsonIgnore
     private List<Address> addresses;
 
 }
