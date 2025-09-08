@@ -45,6 +45,7 @@ public class EmployeeDetailsController {
         employeeDetailsService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping("/fetchEmployee/{id}")
     public ResponseEntity<ViewEmployeeResponsDto> fetchEmployee(@PathVariable int id)
     {

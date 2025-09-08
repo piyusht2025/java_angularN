@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class BankAccountDto {
-    private int id;
+    private String accountNo;
 }
