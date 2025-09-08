@@ -1,5 +1,7 @@
 package com.project.employeeManagement.controller;
 
+import com.project.employeeManagement.dto.EmployeeDetailsDto;
+import com.project.employeeManagement.dto.ViewEmployeeResponsDto;
 import com.project.employeeManagement.model.EmployeeDetails;
 import com.project.employeeManagement.service.EmployeeDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,17 @@ public class EmployeeDetailsController {
     public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable int id) {
         employeeDetailsService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/fetchEmployee/{id}")
+    public ResponseEntity<ViewEmployeeResponsDto> fetchEmployee(@PathVariable int id)
+    {
+
+        return new ResponseEntity<>(employeeDetailsService.fetchEmployee(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/fetchAllEmployees")
+    public ResponseEntity<List<EmployeeDetailsDto>> fetchAllEmployees()
+    {
+        return new ResponseEntity<>(employeeDetailsService.fetchAllEmployee(),HttpStatus.OK);
     }
 }

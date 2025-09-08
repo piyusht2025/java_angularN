@@ -1,17 +1,22 @@
 package com.project.employeeManagement.service;
 
+import com.project.employeeManagement.dto.*;
 import com.project.employeeManagement.model.*;
 import com.project.employeeManagement.repository.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
 public class EmployeeDetailsService {
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private EmployeeDetailsRepo employeeDetailsRepo;
     @Autowired
@@ -132,5 +137,31 @@ public class EmployeeDetailsService {
             }
         }
         employeeDetailsRepo.delete(emp);
+    }
+
+    public ViewEmployeeResponsDto fetchEmployee(int id) {
+        EmployeeDetails employeeDetails = employeeDetailsRepo.findById(id).orElseThrow(RuntimeException::new);
+        ViewEmployeeResponsDto viewEmployeeResponsDto= modelMapper.map(employeeDetails, ViewEmployeeResponsDto.class);
+        DepartmentDto deptName=modelMapper.map(employeeDetails.getDepartment(), DepartmentDto.class);
+        DesignationDto designName=modelMapper.map(employeeDetails.getDesignation(), DesignationDto.class);
+        viewEmployeeResponsDto.setDepartment(deptName.getName());
+        viewEmployeeResponsDto.setDesignation(designName.getName());
+        List<BankAccountDto> accountDtos= employeeDetails.getBankAccounts()
+                .stream()
+                .map(account ->modelMapper.map(account, BankAccountDto.class) )
+                .toList();
+        List<AddressDto> addressDtos= employeeDetails.getAddresses()
+                .stream()
+                .map(address ->modelMapper.map(address, AddressDto.class) )
+                .toList();
+        viewEmployeeResponsDto.setBankAccounts(accountDtos);
+        viewEmployeeResponsDto.setAddresses(addressDtos);
+        return viewEmployeeResponsDto;
+    }
+
+    public List<EmployeeDetailsDto> fetchAllEmployee(){
+        List<EmployeeDetails> employeeDetails = employeeDetailsRepo.findAll();
+        return employeeDetails.stream()
+                .map(emp->modelMapper.map(emp,EmployeeDetailsDto.class)).toList();
     }
 }
