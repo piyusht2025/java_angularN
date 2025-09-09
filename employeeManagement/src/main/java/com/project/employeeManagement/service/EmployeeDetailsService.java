@@ -27,7 +27,6 @@ public class EmployeeDetailsService {
     private BankAccountRepo bankAccountRepo;
     @Autowired
     private AddressRepo addressRepo;
-
     public EmployeeDetails createEmployee(EmployeeDetails employee) {
         if (employee.getDepartment() != null && employee.getDepartment().getId() > 0) {
             Department dept = departmentRepo.findById(employee.getDepartment().getId()).orElse(null);
@@ -68,7 +67,6 @@ public class EmployeeDetailsService {
         }
         return savedEmployee;
     }
-
     public List<EmployeeDetails> getAllEmployees() {
         return employeeDetailsRepo.findAll();
     }

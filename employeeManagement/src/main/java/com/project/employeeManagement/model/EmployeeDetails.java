@@ -36,7 +36,7 @@ public class EmployeeDetails {
     private boolean active=true;
 
     @OneToMany(mappedBy = "employeeDetails")
-    @JsonIgnore
+
     private List<BankAccount> bankAccounts;
 
     @ManyToMany
@@ -45,7 +45,7 @@ public class EmployeeDetails {
             joinColumns = @JoinColumn(name = "emp_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id")
     )
-    @JsonIgnore
+
     private List<Address> addresses;
 
 }

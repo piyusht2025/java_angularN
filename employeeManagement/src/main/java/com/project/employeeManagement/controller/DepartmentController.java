@@ -15,9 +15,9 @@ import java.util.Optional;
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
-    @GetMapping("/getDepartment")
+    @GetMapping("/getAllDepartments")
     public ResponseEntity<List<Department>> getDepartment(){
-        return new ResponseEntity<>(departmentService.getDepartment(), HttpStatus.OK);
+        return new ResponseEntity<>(departmentService.getAllDepartment(), HttpStatus.OK);
     }
 
     @GetMapping("/getDepartment/{id}")

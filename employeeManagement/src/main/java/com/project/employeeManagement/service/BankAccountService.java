@@ -1,5 +1,6 @@
 package com.project.employeeManagement.service;
 
+import com.project.employeeManagement.model.Address;
 import com.project.employeeManagement.model.BankAccount;
 import com.project.employeeManagement.repository.BankAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ public class BankAccountService {
     private BankAccountRepo bankAccountRepo;
 
     public BankAccount createBankAccount(BankAccount bankAccount) {
+        List<BankAccount> bankAccounts=getAllBankAccounts();
+        for (BankAccount bank : bankAccounts){
+            if (bank.getAccountNo().equals(bank.getAccountNo())){
+                return bank;
+            }
+        }
         return bankAccountRepo.save(bankAccount);
     }
 

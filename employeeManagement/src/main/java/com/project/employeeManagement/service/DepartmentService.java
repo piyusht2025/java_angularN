@@ -1,5 +1,6 @@
 package com.project.employeeManagement.service;
 
+import com.project.employeeManagement.model.Address;
 import com.project.employeeManagement.model.Department;
 import com.project.employeeManagement.model.EmployeeDetails;
 import com.project.employeeManagement.repository.DepartmentRepo;
@@ -19,7 +20,7 @@ public class DepartmentService {
     @Autowired
     private EmployeeDetailsRepo employeeDetailsRepo;
 
-    public List<Department> getDepartment() {
+    public List<Department> getAllDepartment() {
         return departmentRepo.findAll();
     }
 
@@ -28,7 +29,12 @@ public class DepartmentService {
     }
 
     public Department createDepartment(Department department) {
-        return departmentRepo.save(department);
+        List<Department> departments=getAllDepartment();
+        for (Department dept : departments){
+            if (department.getName().equals(dept.getName())){
+                return dept;
+            }
+        }return departmentRepo.save(department);
     }
 
     public void deleteDepartment(int id) {

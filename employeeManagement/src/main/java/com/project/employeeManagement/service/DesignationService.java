@@ -1,9 +1,8 @@
 package com.project.employeeManagement.service;
 
+import com.project.employeeManagement.model.*;
 import com.project.employeeManagement.model.Designation;
 import com.project.employeeManagement.model.Designation;
-import com.project.employeeManagement.model.Designation;
-import com.project.employeeManagement.model.EmployeeDetails;
 import com.project.employeeManagement.repository.DesignationRepo;
 import com.project.employeeManagement.repository.EmployeeDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class DesignationService {
     @Autowired
     EmployeeDetailsRepo employeeDetailsRepo;
 
-    public List<Designation> getDesignation() {
+    public List<Designation> getAllDesignation() {
         return designationRepo.findAll();
     }
 
@@ -30,6 +29,12 @@ public class DesignationService {
     }
 
     public Designation createDesignation(Designation designation) {
+        List<Designation> designations=getAllDesignation();
+        for (Designation desg : designations){
+            if (designation.getName().equals(desg.getName())){
+                return desg;
+            }
+        }
         return designationRepo.save(designation);
     }
 

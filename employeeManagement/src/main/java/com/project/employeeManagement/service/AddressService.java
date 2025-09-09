@@ -18,6 +18,12 @@ public class AddressService {
     private EmployeeDetailsRepo employeeDetailsRepo;
 
     public Address createAddress(Address address) {
+        List<Address> addresses=getAllAddresses();
+        for (Address add : addresses){
+            if (address.getAddressDetails().equals(add.getAddressDetails())){
+                return add;
+            }
+        }
         return addressRepo.save(address);
     }
 

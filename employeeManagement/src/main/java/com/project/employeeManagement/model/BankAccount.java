@@ -24,6 +24,6 @@ public class BankAccount {
 
     @ManyToOne
     @JoinColumn(name = "emp_id", referencedColumnName = "id")
-
+    @JsonIgnore
     private EmployeeDetails employeeDetails;
 }

@@ -1,6 +1,7 @@
 package com.project.employeeManagement.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,6 +24,6 @@ public class Address {
     private String addressDetails;
 
     @ManyToMany(mappedBy = "addresses",cascade = {CascadeType.ALL})
-
+    @JsonIgnore
     private List<EmployeeDetails> employees;
 }

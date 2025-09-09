@@ -19,9 +19,9 @@ import java.util.Optional;
 public class DesignationController {
     @Autowired
     DesignationService designationService;
-    @GetMapping("/getDesignation")
+    @GetMapping("/getAllDesignations")
     public ResponseEntity<List<Designation>> getDesignation(){
-        return new ResponseEntity<>(designationService.getDesignation(), HttpStatus.OK);
+        return new ResponseEntity<>(designationService.getAllDesignation(), HttpStatus.OK);
     }
 
     @GetMapping("/getDesignation/{id}")
