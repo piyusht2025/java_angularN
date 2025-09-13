@@ -2,7 +2,6 @@ package com.project.employeeManagement.service;
 
 import com.project.employeeManagement.model.*;
 import com.project.employeeManagement.model.Designation;
-import com.project.employeeManagement.model.Designation;
 import com.project.employeeManagement.repository.DesignationRepo;
 import com.project.employeeManagement.repository.EmployeeDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;

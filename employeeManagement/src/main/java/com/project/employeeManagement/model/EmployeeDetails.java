@@ -1,20 +1,13 @@
 package com.project.employeeManagement.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Builder
-@Jacksonized
 @Table(name = "employee_details")
 public class EmployeeDetails {
     @Id
@@ -32,11 +25,14 @@ public class EmployeeDetails {
     @JoinColumn(name = "design_id", referencedColumnName = "id")
     private Designation designation;
 
-    @Column(name="active")
-    private boolean active=true;
+    @Column(name="active" )
+    private boolean active;
+
+    public EmployeeDetails(){
+        this.active=true;
+    }
 
     @OneToMany(mappedBy = "employeeDetails")
-
     private List<BankAccount> bankAccounts;
 
     @ManyToMany

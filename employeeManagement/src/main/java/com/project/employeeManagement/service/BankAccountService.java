@@ -1,6 +1,5 @@
 package com.project.employeeManagement.service;
 
-import com.project.employeeManagement.model.Address;
 import com.project.employeeManagement.model.BankAccount;
 import com.project.employeeManagement.repository.BankAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
